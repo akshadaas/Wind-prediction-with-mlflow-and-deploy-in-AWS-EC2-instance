@@ -29,29 +29,29 @@ class ModelEvaluation:
         test_x = test_data.drop([self.config.target_column],axis=1)
         test_y = test_data[[self.config.target_column]]
 
-        #mlflow.set_registry_uri(self.config.mlflow_url)
-        #tracking_url_type_store = urlparse(mlflow.get_tracking_uri()).schema
+        mlflow.set_registry_uri(self.config.mlflow_url)
+        tracking_url_type_store = urlparse(mlflow.get_tracking_uri()).scheme
 
-        #with mlflow.start_run():
-        predicted_qualities = model.predict(test_x)
+        with mlflow.start_run():
+            predicted_qualities = model.predict(test_x)
 
-        rmse, mae, r_squared  = self.eval_metric(test_y,predicted_qualities)
+            rmse, mae, r_squared  = self.eval_metric(test_y,predicted_qualities)
 
-        scores = {
-                'rmse' : rmse,
-                'mae' : mae,
-                'r_squared' : r_squared
-            }
+            scores = {
+                    'rmse' : rmse,
+                    'mae' : mae,
+                    'r_squared' : r_squared
+                }
 
-        save_json(path=Path(self.config.metric_file_name),data=scores)
-           # mlflow.log_params(self.config.all_params)
+            save_json(path=Path(self.config.metric_file_name),data=scores)
+            mlflow.log_params(self.config.all_params)
 
-           # mlflow.log_metric('rmse',rmse)
-            #mlflow.log_metric('mae', mae)
-           # mlflow.log_metric('r_squared',r_squared)
+            mlflow.log_metric('rmse',rmse)
+            mlflow.log_metric('mae', mae)
+            mlflow.log_metric('r_squared',r_squared)
 
-            #if tracking_url_type_store != 'file':
-               # mlflow.sklearn.log_model(model, "model", registered_model_name = 'ElasticNetModel')
+            if tracking_url_type_store != 'file':
+               mlflow.sklearn.log_model(model, "model", registered_model_name = 'ElasticNetModel')
 
-           # else:
-               # mlflow.sklearn.log_model(model, 'model')
+            else:
+                mlflow.sklearn.log_model(model, 'model')
