@@ -1,0 +1,15 @@
+artifact_uri: file:///C:/Users/swapn/Documents/NLP_projects/Wind-prediction-with-mlflow-and-deploy-in-AWS-EC2-instance/mlruns/0/063c0d19ed1d4af185c7cbf14cd62333/artifacts
+end_time: 1701878553343
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 063c0d19ed1d4af185c7cbf14cd62333
+run_name: invincible-stag-54
+run_uuid: 063c0d19ed1d4af185c7cbf14cd62333
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1701878545417
+status: 3
+tags: []
+user_id: swapn
